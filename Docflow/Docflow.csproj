@@ -1,0 +1,1244 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CF80B5B9-9BA0-456D-8045-C7280891650D}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Docflow</RootNamespace>
+    <AssemblyName>Docflow</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.2.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Windsor.4.1.0\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetZip, Version=1.10.1.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.10.1\lib\net20\DotNetZip.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Ext.Direct.Mvc, Version=3.0.2.0, Culture=neutral, PublicKeyToken=2ec707a789ea209b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ext.Direct.Mvc4.3.0.2\lib\net40\Ext.Direct.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.JScript" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz, Version=2.6.1.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quartz.2.6.1\lib\net40\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <EmbeddedResource Include="static\ext-js\adapter\ext\ext-base-debug.js" />
+    <EmbeddedResource Include="static\ext-js\adapter\ext\ext-base.js" />
+    <EmbeddedResource Include="static\ext-js\adapter\jquery\ext-jquery-adapter-debug.js" />
+    <EmbeddedResource Include="static\ext-js\adapter\jquery\ext-jquery-adapter.js" />
+    <EmbeddedResource Include="static\ext-js\adapter\prototype\ext-prototype-adapter-debug.js" />
+    <EmbeddedResource Include="static\ext-js\adapter\prototype\ext-prototype-adapter.js" />
+    <EmbeddedResource Include="static\ext-js\adapter\yui\ext-yui-adapter-debug.js" />
+    <EmbeddedResource Include="static\ext-js\adapter\yui\ext-yui-adapter.js" />
+    <EmbeddedResource Include="static\ext-js\ext-all-debug-w-comments.js" />
+    <EmbeddedResource Include="static\ext-js\ext-all-debug.js" />
+    <EmbeddedResource Include="static\ext-js\ext-all.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\cmp-foundation-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\cmp-foundation.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\data-foundation-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\data-foundation.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\data-grouping-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\data-grouping.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\data-json-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\data-json.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\data-list-views-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\data-list-views.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\data-xml-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\data-xml.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\direct-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\direct.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\ext-core-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\ext-core.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\ext-dd-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\ext-dd.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\ext-foundation-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\ext-foundation.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-buttons-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-buttons.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-charts-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-charts.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-forms-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-forms.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-grid-editor-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-grid-editor.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-grid-foundation-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-grid-foundation.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-grid-grouping-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-grid-grouping.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-grid-property-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-grid-property.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-history-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-history.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-menu-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-menu.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-tabs-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-tabs.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-tips-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-tips.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-toolbars-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-toolbars.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-tree-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\pkg-tree.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\resizable-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\resizable.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\state-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\state.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\window-debug.js" />
+    <EmbeddedResource Include="static\ext-js\pkgs\window.js" />
+    <EmbeddedResource Include="static\ext-js\resources\charts.swf" />
+    <EmbeddedResource Include="static\ext-js\resources\css\debug.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\ext-all-notheme.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\ext-all.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\reset-min.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\borders.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\box.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\button.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\combo.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\core.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\date-picker.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\dd.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\debug.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\dialog.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\editor.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\form.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\grid.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\layout.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\list-view.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\menu.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\panel-reset.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\panel.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\pivotgrid.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\progress.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\qtips.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\reset.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\resizable.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\slider.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\tabs.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\toolbar.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\tree.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\structure\window.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\borders.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\box.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\button.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\combo.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\core.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\date-picker.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\dd.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\debug.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\dialog.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\editor.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\form.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\grid.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\layout.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\list-view.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\menu.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\panel.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\progress.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\qtips.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\resizable.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\slider.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\tabs.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\toolbar.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\tree.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-access\window.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\borders.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\box.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\button.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\combo.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\core.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\date-picker.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\dd.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\debug.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\dialog.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\editor.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\form.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\grid.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\layout.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\list-view.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\menu.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\panel.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\pivotgrid.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\progress.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\qtips.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\resizable.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\slider.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\tabs.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\toolbar.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\tree.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\theme-gray\window.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\borders.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\box.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\button.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\combo.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\core.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\date-picker.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\dd.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\debug.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\dialog.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\editor.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\form.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\grid.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\layout.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\list-view.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\menu.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\panel.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\pivotgrid.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\progress.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\qtips.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\resizable.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\slider.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\tabs.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\toolbar.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\tree.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\visual\window.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\xtheme-access.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\xtheme-blue.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\xtheme-gray.css" />
+    <EmbeddedResource Include="static\ext-js\resources\css\yourtheme.css" />
+    <EmbeddedResource Include="static\ext-js\resources\expressinstall.swf" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\box\corners-blue.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\box\corners.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\box\l-blue.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\box\l.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\box\r-blue.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\box\r.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\box\tb-blue.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\box\tb.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\button\arrow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\button\btn.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\button\group-cs.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\button\group-lr.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\button\group-tb.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\button\s-arrow-b-noline.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\button\s-arrow-b.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\button\s-arrow-bo.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\button\s-arrow-noline.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\button\s-arrow-o.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\button\s-arrow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\editor\tb-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\form\checkbox.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\form\clear-trigger.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\form\date-trigger.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\form\error-tip-corners.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\form\exclamation.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\form\radio.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\form\search-trigger.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\form\text-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\form\trigger-tpl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\form\trigger.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\arrow-left-white.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\arrow-right-white.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\col-move-bottom.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\col-move-top.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\columns.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\dirty.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\done.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\drop-no.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\drop-yes.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\footer-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\grid-blue-hd.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\grid-blue-split.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\grid-hrow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\grid-loading.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\grid-split.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\grid-vista-hd.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\grid3-hd-btn.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\grid3-hrow-over.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\grid3-hrow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\grid3-special-col-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\grid3-special-col-sel-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\group-by.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\group-collapse.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\group-expand-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\group-expand.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\hd-pop.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\hmenu-asc.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\hmenu-desc.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\hmenu-lock.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\hmenu-lock.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\hmenu-unlock.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\hmenu-unlock.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\invalid_line.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\loading.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\mso-hd.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\nowait.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\page-first-disabled.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\page-first.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\page-last-disabled.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\page-last.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\page-next-disabled.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\page-next.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\page-prev-disabled.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\page-prev.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\pick-button.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\refresh.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\row-check-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\row-expand-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\row-over.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\row-sel.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\sort-hd.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\sort_asc.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\sort_desc.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\grid\wait.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\menu\checked.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\menu\group-checked.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\menu\item-over.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\menu\menu-parent.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\menu\menu.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\menu\unchecked.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\panel\corners-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\panel\left-right.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\panel\light-hd.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\panel\tool-sprite-tpl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\panel\tool-sprites.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\panel\tools-sprites-trans.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\panel\top-bottom.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\panel\white-corners-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\panel\white-left-right.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\panel\white-top-bottom.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\progress\progress-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\qtip\close.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\qtip\tip-anchor-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\qtip\tip-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\shared\glass-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\shared\hd-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\shared\left-btn.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\shared\right-btn.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\sizer\e-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\sizer\e-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\sizer\ne-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\sizer\ne-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\sizer\nw-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\sizer\nw-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\sizer\s-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\sizer\s-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\sizer\se-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\sizer\se-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\sizer\square.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\sizer\sw-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\sizer\sw-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\slider\slider-bg.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\slider\slider-thumb.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\slider\slider-v-bg.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\slider\slider-v-thumb.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tabs\scroll-left.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tabs\scroll-right.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tabs\tab-btm-inactive-left-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tabs\tab-btm-inactive-right-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tabs\tab-btm-left-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tabs\tab-btm-right-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tabs\tab-close.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tabs\tab-strip-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tabs\tab-strip-btm-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tabs\tabs-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\toolbar\bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\toolbar\btn-arrow-light.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\toolbar\btn-arrow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\toolbar\btn-over-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\toolbar\gray-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\toolbar\more.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\toolbar\s-arrow-bo.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\toolbar\tb-btn-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\toolbar\tb-xl-btn-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\toolbar\tb-xl-sep.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\arrows.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\drop-add.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\drop-between.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\drop-no.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\drop-over.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\drop-under.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\drop-yes.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\elbow-end-minus-nl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\elbow-end-minus.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\elbow-end-plus-nl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\elbow-end-plus.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\elbow-end.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\elbow-line.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\elbow-minus-nl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\elbow-minus.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\elbow-plus-nl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\elbow-plus.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\elbow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\folder-open.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\folder.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\leaf.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\loading.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\tree\s.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\window\icon-error.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\window\icon-info.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\window\icon-question.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\window\icon-warning.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\window\left-corners.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\window\left-right.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\window\right-corners.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\access\window\top-bottom.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\box\corners-blue.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\box\corners.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\box\l-blue.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\box\l.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\box\r-blue.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\box\r.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\box\tb-blue.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\box\tb.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\button\arrow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\button\btn.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\button\group-cs.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\button\group-lr.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\button\group-tb.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\button\s-arrow-b-noline.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\button\s-arrow-b.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\button\s-arrow-bo.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\button\s-arrow-noline.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\button\s-arrow-o.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\button\s-arrow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\dd\drop-add.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\dd\drop-no.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\dd\drop-yes.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\editor\tb-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\form\checkbox.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\form\clear-trigger.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\form\date-trigger.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\form\error-tip-corners.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\form\exclamation.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\form\radio.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\form\search-trigger.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\form\text-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\form\trigger-square.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\form\trigger-tpl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\form\trigger.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\gradient-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\arrow-left-white.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\arrow-right-white.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\col-move-bottom.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\col-move-top.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\columns.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\dirty.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\done.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\drop-no.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\drop-yes.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\footer-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\grid-blue-hd.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\grid-blue-split.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\grid-hrow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\grid-loading.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\grid-split.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\grid-vista-hd.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\grid3-hd-btn.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\grid3-hrow-over.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\grid3-hrow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\grid3-rowheader.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\grid3-special-col-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\grid3-special-col-sel-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\group-by.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\group-collapse.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\group-expand-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\group-expand.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\hd-pop.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\hmenu-asc.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\hmenu-desc.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\hmenu-lock.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\hmenu-lock.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\hmenu-unlock.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\hmenu-unlock.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\invalid_line.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\loading.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\mso-hd.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\nowait.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\page-first-disabled.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\page-first.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\page-last-disabled.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\page-last.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\page-next-disabled.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\page-next.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\page-prev-disabled.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\page-prev.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\pick-button.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\refresh-disabled.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\refresh.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\row-check-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\row-expand-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\row-over.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\row-sel.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\sort-hd.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\sort_asc.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\sort_desc.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\grid\wait.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\layout\collapse.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\layout\expand.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\layout\gradient-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\layout\mini-bottom.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\layout\mini-left.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\layout\mini-right.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\layout\mini-top.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\layout\ns-collapse.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\layout\ns-expand.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\layout\panel-close.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\layout\panel-title-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\layout\panel-title-light-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\layout\stick.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\layout\stuck.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\layout\tab-close-on.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\layout\tab-close.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\menu\checked.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\menu\group-checked.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\menu\item-over.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\menu\menu-parent.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\menu\menu.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\menu\unchecked.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\panel\corners-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\panel\left-right.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\panel\light-hd.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\panel\tool-sprite-tpl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\panel\tool-sprites.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\panel\tools-sprites-trans.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\panel\top-bottom.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\panel\top-bottom.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\panel\white-corners-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\panel\white-left-right.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\panel\white-top-bottom.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\progress\progress-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\qtip\bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\qtip\close.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\qtip\tip-anchor-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\qtip\tip-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\s.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\shadow-c.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\shadow-lr.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\shadow.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\shared\blue-loading.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\shared\calendar.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\shared\glass-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\shared\hd-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\shared\large-loading.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\shared\left-btn.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\shared\loading-balls.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\shared\right-btn.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\shared\warning.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\sizer\e-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\sizer\e-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\sizer\ne-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\sizer\ne-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\sizer\nw-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\sizer\nw-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\sizer\s-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\sizer\s-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\sizer\se-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\sizer\se-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\sizer\square.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\sizer\sw-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\sizer\sw-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\slider\slider-bg.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\slider\slider-thumb.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\slider\slider-v-bg.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\slider\slider-v-thumb.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tabs\scroll-left.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tabs\scroll-right.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tabs\scroller-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tabs\tab-btm-inactive-left-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tabs\tab-btm-inactive-right-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tabs\tab-btm-left-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tabs\tab-btm-over-left-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tabs\tab-btm-over-right-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tabs\tab-btm-right-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tabs\tab-close.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tabs\tab-strip-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tabs\tab-strip-bg.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tabs\tab-strip-btm-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tabs\tabs-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\toolbar\bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\toolbar\btn-arrow-light.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\toolbar\btn-arrow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\toolbar\btn-over-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\toolbar\gray-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\toolbar\more.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\toolbar\tb-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\toolbar\tb-btn-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\toolbar\tb-xl-btn-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\toolbar\tb-xl-sep.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\arrows.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\drop-add.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\drop-between.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\drop-no.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\drop-over.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\drop-under.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\drop-yes.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\elbow-end-minus-nl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\elbow-end-minus.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\elbow-end-plus-nl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\elbow-end-plus.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\elbow-end.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\elbow-line.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\elbow-minus-nl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\elbow-minus.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\elbow-plus-nl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\elbow-plus.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\elbow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\folder-open.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\folder.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\leaf.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\loading.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\tree\s.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\window\icon-error.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\window\icon-info.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\window\icon-question.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\window\icon-warning.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\window\left-corners.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\window\left-right.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\window\right-corners.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\default\window\top-bottom.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\button\btn-arrow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\button\btn-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\button\btn.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\button\group-cs.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\button\group-lr.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\button\group-tb.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\button\s-arrow-bo.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\button\s-arrow-o.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\form\clear-trigger.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\form\date-trigger.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\form\search-trigger.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\form\trigger-square.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\form\trigger.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\gradient-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\col-move-bottom.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\col-move-top.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\grid3-hd-btn.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\grid3-hrow-over.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\grid3-hrow-over2.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\grid3-hrow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\grid3-hrow2.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\grid3-special-col-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\grid3-special-col-bg2.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\grid3-special-col-sel-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\group-collapse.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\group-expand-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\group-expand.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\page-first.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\page-last.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\page-next.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\page-prev.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\refresh.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\row-expand-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\sort-hd.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\sort_asc.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\grid\sort_desc.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\menu\group-checked.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\menu\item-over-disabled.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\menu\item-over.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\menu\menu-parent.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\panel\corners-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\panel\left-right.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\panel\light-hd.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\panel\tool-sprite-tpl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\panel\tool-sprites.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\panel\tools-sprites-trans.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\panel\top-bottom.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\panel\top-bottom.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\panel\white-corners-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\panel\white-left-right.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\panel\white-top-bottom.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\progress\progress-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\qtip\bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\qtip\close.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\qtip\tip-anchor-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\qtip\tip-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\s.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\shared\hd-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\shared\left-btn.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\shared\right-btn.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\sizer\e-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\sizer\ne-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\sizer\nw-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\sizer\s-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\sizer\se-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\sizer\square.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\sizer\sw-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\slider\slider-thumb.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\slider\slider-v-thumb.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tabs\scroll-left.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tabs\scroll-right.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tabs\scroller-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tabs\tab-btm-inactive-left-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tabs\tab-btm-inactive-right-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tabs\tab-btm-left-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tabs\tab-btm-over-left-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tabs\tab-btm-over-right-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tabs\tab-btm-right-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tabs\tab-close.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tabs\tab-strip-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tabs\tab-strip-bg.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tabs\tab-strip-btm-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tabs\tabs-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\toolbar\bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\toolbar\btn-arrow-light.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\toolbar\btn-arrow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\toolbar\btn-over-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\toolbar\gray-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\toolbar\more.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\toolbar\tb-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\toolbar\tb-btn-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tree\arrows.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tree\elbow-end-minus-nl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tree\elbow-end-minus.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tree\elbow-end-plus-nl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\tree\elbow-end-plus.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\window\icon-error.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\window\icon-info.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\window\icon-question.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\window\icon-warning.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\window\left-corners.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\window\left-right.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\window\right-corners.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\gray\window\top-bottom.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\basic-dialog\bg-center.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\basic-dialog\bg-left.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\basic-dialog\bg-right.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\basic-dialog\close.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\basic-dialog\collapse.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\basic-dialog\dlg-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\basic-dialog\e-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\basic-dialog\expand.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\basic-dialog\hd-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\basic-dialog\s-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\basic-dialog\se-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\basic-dialog\w-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\gradient-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\grid\grid-split.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\grid\grid-vista-hd.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\layout\collapse.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\layout\expand.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\layout\gradient-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\layout\ns-collapse.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\layout\ns-expand.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\layout\panel-close.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\layout\panel-title-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\layout\panel-title-light-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\layout\stick.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\layout\tab-close-on.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\layout\tab-close.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\qtip\bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\qtip\tip-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\s.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\sizer\e-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\sizer\e-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\sizer\ne-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\sizer\ne-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\sizer\nw-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\sizer\nw-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\sizer\s-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\sizer\s-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\sizer\se-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\sizer\se-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\sizer\sw-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\sizer\sw-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\tabs\tab-btm-inactive-left-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\tabs\tab-btm-inactive-right-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\tabs\tab-btm-left-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\tabs\tab-btm-right-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\tabs\tab-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\toolbar\gray-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\vista\toolbar\tb-btn-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\box\corners-blue.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\box\corners.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\box\l-blue.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\box\l.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\box\r-blue.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\box\r.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\box\tb-blue.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\box\tb.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\button\arrow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\button\btn.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\button\group-cs.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\button\group-lr.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\button\group-tb.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\button\s-arrow-b-noline.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\button\s-arrow-b.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\button\s-arrow-bo.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\button\s-arrow-noline.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\button\s-arrow-o.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\button\s-arrow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\dd\drop-add.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\dd\drop-no.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\dd\drop-yes.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\editor\tb-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\form\checkbox.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\form\clear-trigger.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\form\date-trigger.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\form\error-tip-corners.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\form\exclamation.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\form\radio.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\form\search-trigger.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\form\text-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\form\trigger-square.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\form\trigger-tpl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\form\trigger.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\gradient-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\arrow-left-white.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\arrow-right-white.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\col-move-bottom.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\col-move-top.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\columns.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\dirty.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\done.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\drop-no.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\drop-yes.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\footer-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\grid-blue-hd.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\grid-blue-split.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\grid-hrow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\grid-loading.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\grid-split.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\grid-vista-hd.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\grid3-hd-btn.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\grid3-hrow-over.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\grid3-hrow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\grid3-special-col-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\grid3-special-col-sel-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\group-by.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\group-collapse.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\group-expand-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\group-expand.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\hd-pop.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\hmenu-asc.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\hmenu-desc.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\hmenu-lock.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\hmenu-lock.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\hmenu-unlock.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\hmenu-unlock.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\invalid_line.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\loading.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\mso-hd.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\nowait.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\page-first-disabled.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\page-first.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\page-last-disabled.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\page-last.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\page-next-disabled.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\page-next.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\page-prev-disabled.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\page-prev.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\pick-button.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\refresh.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\row-check-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\row-expand-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\row-over.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\row-sel.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\sort-hd.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\sort_asc.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\sort_desc.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\grid\wait.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\layout\collapse.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\layout\expand.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\layout\gradient-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\layout\mini-bottom.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\layout\mini-left.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\layout\mini-right.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\layout\mini-top.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\layout\ns-collapse.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\layout\ns-expand.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\layout\panel-close.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\layout\panel-title-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\layout\panel-title-light-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\layout\stick.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\layout\stuck.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\layout\tab-close-on.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\layout\tab-close.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\menu\checked.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\menu\group-checked.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\menu\item-over.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\menu\menu-parent.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\menu\menu.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\menu\unchecked.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\panel\corners-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\panel\left-right.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\panel\light-hd.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\panel\tool-sprite-tpl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\panel\tool-sprites.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\panel\tools-sprites-trans.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\panel\top-bottom.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\panel\top-bottom.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\panel\white-corners-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\panel\white-left-right.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\panel\white-top-bottom.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\progress\progress-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\qtip\bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\qtip\close.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\qtip\tip-anchor-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\qtip\tip-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\s.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\shadow-c.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\shadow-lr.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\shadow.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\shared\blue-loading.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\shared\calendar.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\shared\glass-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\shared\hd-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\shared\large-loading.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\shared\left-btn.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\shared\loading-balls.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\shared\right-btn.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\shared\warning.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\sizer\e-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\sizer\e-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\sizer\ne-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\sizer\ne-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\sizer\nw-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\sizer\nw-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\sizer\s-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\sizer\s-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\sizer\se-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\sizer\se-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\sizer\square.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\sizer\sw-handle-dark.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\sizer\sw-handle.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\slider\slider-bg.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\slider\slider-thumb.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\slider\slider-v-bg.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\slider\slider-v-thumb.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tabs\scroll-left.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tabs\scroll-right.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tabs\scroller-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tabs\tab-btm-inactive-left-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tabs\tab-btm-inactive-right-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tabs\tab-btm-left-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tabs\tab-btm-over-left-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tabs\tab-btm-over-right-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tabs\tab-btm-right-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tabs\tab-close.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tabs\tab-strip-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tabs\tab-strip-bg.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tabs\tab-strip-btm-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tabs\tabs-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\toolbar\bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\toolbar\btn-arrow-light.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\toolbar\btn-arrow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\toolbar\btn-over-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\toolbar\gray-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\toolbar\more.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\toolbar\tb-bg.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\toolbar\tb-btn-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\toolbar\tb-xl-btn-sprite.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\toolbar\tb-xl-sep.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\arrows.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\drop-add.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\drop-between.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\drop-no.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\drop-over.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\drop-under.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\drop-yes.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\elbow-end-minus-nl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\elbow-end-minus.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\elbow-end-plus-nl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\elbow-end-plus.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\elbow-end.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\elbow-line.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\elbow-minus-nl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\elbow-minus.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\elbow-plus-nl.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\elbow-plus.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\elbow.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\folder-open.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\folder.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\leaf.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\loading.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\tree\s.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\window\icon-error.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\window\icon-info.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\window\icon-question.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\window\icon-warning.gif" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\window\left-corners.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\window\left-right.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\window\right-corners.png" />
+    <EmbeddedResource Include="static\ext-js\resources\images\yourtheme\window\top-bottom.png" />
+    <EmbeddedResource Include="static\ext-js\src\debug.js" />
+    <EmbeddedResource Include="static\ext-js\src\error-checking.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-af.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-am.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-bg.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-ca.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-cs.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-da.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-de.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-el_GR.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-en.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-en_GB.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-es.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-fa.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-fi.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-fr.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-fr_CA.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-gr.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-he.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-hr.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-hu.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-id.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-it.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-ja.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-ko.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-lt.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-lv.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-mk.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-nl.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-no_NB.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-no_NN.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-pl.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-pt.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-pt_BR.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-pt_PT.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-ro.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-ru.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-sk.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-sl.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-sr.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-sr_RS.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-sv_SE.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-th.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-tr.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-ukr.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-vn.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-zh_CN.js" />
+    <EmbeddedResource Include="static\ext-js\src\locale\ext-lang-zh_TW.js" />
+    <EmbeddedResource Include="static\ext-js\ux\FileUploadField.js" />
+    <EmbeddedResource Include="static\ext-js\resources\ux\fileuploadfield.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Configurations\UserPaths.cs" />
+    <Compile Include="Container\AppCastleInstaller.cs" />
+    <Compile Include="Container\AppContainer.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\WorkController.cs" />
+    <Compile Include="DAL\EntityContext\DocumentContext.cs" />
+    <Compile Include="DAL\Models\UploadEntity.cs" />
+    <Compile Include="DAL\Models\UploadProgress.cs" />
+    <Compile Include="DtoEntities\UploadParams.cs" />
+    <Compile Include="Enums\ErrorCode.cs" />
+    <Compile Include="Enums\ProgressStatus.cs" />
+    <Compile Include="Enums\UploadStatus.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Impl\UploadService.cs" />
+    <Compile Include="Interface\IUploadService.cs" />
+    <Compile Include="Logging\AppLogging.cs" />
+    <Compile Include="Migrations\201711281250051_AddCompanyMigration.cs" />
+    <Compile Include="Migrations\201711281250051_AddCompanyMigration.Designer.cs">
+      <DependentUpon>201711281250051_AddCompanyMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scheduler\AppScheduler.cs" />
+    <Compile Include="Jobs\UnloadDocumentJob.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="job_scheduling_data_2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <Content Include="static\ext-js\resources\images\access\form\clear-trigger.psd" />
+    <Content Include="static\ext-js\resources\images\access\form\date-trigger.psd" />
+    <Content Include="static\ext-js\resources\images\access\form\search-trigger.psd" />
+    <Content Include="static\ext-js\resources\images\access\form\trigger.psd" />
+    <Content Include="static\ext-js\resources\images\default\form\clear-trigger.psd" />
+    <Content Include="static\ext-js\resources\images\default\form\date-trigger.psd" />
+    <Content Include="static\ext-js\resources\images\default\form\search-trigger.psd" />
+    <Content Include="static\ext-js\resources\images\default\form\trigger-square.psd" />
+    <Content Include="static\ext-js\resources\images\default\form\trigger.psd" />
+    <Content Include="static\ext-js\resources\images\default\window\left-corners.psd" />
+    <Content Include="static\ext-js\resources\images\default\window\left-right.psd" />
+    <Content Include="static\ext-js\resources\images\default\window\right-corners.psd" />
+    <Content Include="static\ext-js\resources\images\default\window\top-bottom.psd" />
+    <Content Include="static\ext-js\resources\images\yourtheme\form\clear-trigger.psd" />
+    <Content Include="static\ext-js\resources\images\yourtheme\form\date-trigger.psd" />
+    <Content Include="static\ext-js\resources\images\yourtheme\form\search-trigger.psd" />
+    <Content Include="static\ext-js\resources\images\yourtheme\form\trigger-square.psd" />
+    <Content Include="static\ext-js\resources\images\yourtheme\form\trigger.psd" />
+    <Content Include="static\ext-js\resources\images\yourtheme\window\left-corners.psd" />
+    <Content Include="static\ext-js\resources\images\yourtheme\window\left-right.psd" />
+    <Content Include="static\ext-js\resources\images\yourtheme\window\right-corners.psd" />
+    <Content Include="static\ext-js\resources\images\yourtheme\window\top-bottom.psd" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="static\ext-js\resources\images\vista\dd\" />
+    <Folder Include="static\ext-js\resources\images\vista\tree\" />
+    <Folder Include="Views\Info\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711281250051_AddCompanyMigration.resx">
+      <DependentUpon>201711281250051_AddCompanyMigration.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52693</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:52693/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
