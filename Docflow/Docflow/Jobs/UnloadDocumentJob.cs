@@ -38,6 +38,10 @@
 
         public void Execute(IJobExecutionContext context)
         {
+
+            Process currentProc = Process.GetCurrentProcess();
+            
+
             AppLogging.Logger.Debug("Начали задачу");
             
             var upload = DbContext.UploadEntityTable.FirstOrDefault(u => u.UploadStatus < UploadStatus.Completed);
@@ -263,7 +267,16 @@
                 #region  Архивация
                 try
                 {
-                    var archivePath = Path.Combine(upload.UploadPath, "result.zip");
+                    var contractCountInArchive = double.Parse(ConfigurationManager.AppSettings["countToArchive"]);
+
+                    var archiveIndex = Math.Round(upload.UploadProgressRows.Count(progress => progress.ProgressStatus == ProgressStatus.Zipped) / contractCountInArchive, MidpointRounding.AwayFromZero);
+
+                    if (archiveIndex < 1)
+                    {
+                        archiveIndex = 1;
+                    }
+
+                    var archivePath = Path.Combine(upload.UploadPath, string.Format("result{0}.zip", archiveIndex));
 
                     using (var zipFile = File.Exists(archivePath) ? ZipFile.Read(archivePath) : new ZipFile(archivePath))
                     {
@@ -283,6 +296,14 @@
                             {
                                 ChangeUploadStatus(upload, UploadStatus.Canceled);
                                 context.Scheduler.UnscheduleJob(context.Trigger.Key);
+                                return;
+                            }
+
+                            var freshArchiveIndex = Math.Round(upload.UploadProgressRows.Count(progress => progress.ProgressStatus == ProgressStatus.Zipped) / contractCountInArchive, MidpointRounding.AwayFromZero);
+
+                            if (freshArchiveIndex > archiveIndex)
+                            {
+                                // выходим чтобы создать новый архив
                                 return;
                             }
 
@@ -334,6 +355,9 @@
             }
 
 
+            AppLogging.Logger.Debug("Объем памяти: " + currentProc.PagedMemorySize64);
+                
+
             #region Если нужно удалять файлы
             //foreach (var uploadUploadProgressRow in upload.UploadProgressRows)
             //{
@@ -357,7 +381,7 @@
 
                 AppLogging.Logger.Info("Формируем протокол выполненной работы.");
 
-                using (var streamWriter = new StreamWriter(upload.UploadPath+"\\протокол выполнения.txt"))
+                using (var streamWriter = new StreamWriter(upload.UploadPath+"\\success.txt"))
                 {
                     streamWriter.WriteLine(string.Format("Общее количество договоров: {0}", upload.ContractCount));
                     streamWriter.WriteLine(string.Format("Количество заархивированных: {0}", upload.ZippedCount));
@@ -406,7 +430,7 @@
         /// <returns></returns>
         private bool TimePartIsOver(DateTime fireTime)
         {
-            var timePart = fireTime.Add(new TimeSpan(0, 0, 2, 0));
+            var timePart = fireTime.Add(new TimeSpan(0, 0, 10, 0));
 
             bool result = (DateTime.Compare(timePart, DateTime.Now) < 0);
 

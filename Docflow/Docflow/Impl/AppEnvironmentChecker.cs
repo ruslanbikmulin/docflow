@@ -92,6 +92,22 @@
                 this.AppReadyToWork = false;
                 AppLogging.Logger.Fatal(e, "Проверьте секцию userConfigs в WebConfig");
             }
+
+
+            try
+            {
+                var contractCountInArchive = double.Parse(ConfigurationManager.AppSettings["countToArchive"]);
+
+                if (contractCountInArchive == 0)
+                {
+                    throw new Exception("Не указано количесво договоров в архиве!");
+                }
+            }
+            catch (Exception e)
+            {
+                this.AppReadyToWork = false;
+                AppLogging.Logger.Fatal(e, "Не указано количесво договоров в архиве в WebConfig!");
+            }
         }
     }
 }
