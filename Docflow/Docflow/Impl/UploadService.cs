@@ -105,7 +105,10 @@
                             throw new Exception("Не указан каталог для сохранения!");
                         }
 
-                        fileFullPath = string.Format("{0}{1}", contractIdentifiresSavePath, "contracts.xlsx");
+                        var shortDate = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() +
+                                        DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString();
+
+                        fileFullPath = string.Format("{0}{1}", contractIdentifiresSavePath, "contracts_input_" + shortDate + ".xlsx");
                         package.SaveAs(new FileInfo(fileFullPath));
                     }
                 }

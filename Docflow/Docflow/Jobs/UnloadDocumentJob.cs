@@ -50,7 +50,7 @@
             {
                 // логировать и выходить
                 var message = "Не удалось получить параметры активной выгрузки. Процесс прекращен.";
-                AppLogging.Logger.Error(message);
+                AppLogging.Logger.Debug(message);
                 
                 context.Scheduler.UnscheduleJob(context.Trigger.Key);
                 return;
@@ -62,11 +62,29 @@
             // если статус Starting то надо заполнить эту инфу
             if (upload.UploadStatus == UploadStatus.Starting)
             {
+                // надо оценить количество свободного места
+                string driveName = Path.GetPathRoot(upload.UploadPath);
+
+                var driveInfo = new DriveInfo(driveName);
+
+                var freeSpace = ((driveInfo.AvailableFreeSpace / 1024) / 1024) / 1024;
+
+                if (freeSpace < 10)
+                {
+                    var message = "Выгрузка прервана, объем свободной памяти меньше 10 гб. Обратитесь к системному администратору!";
+                    AppLogging.Logger.Debug(message);
+
+                    context.Scheduler.UnscheduleJob(context.Trigger.Key);
+
+                    this.SendEmail(upload.Email, "Выгрузка документов", message);
+                    return;
+                }
+
                 var documentIdentifers = this.GetContractIdentifires(upload);
                 if (documentIdentifers.Count == 0)
                 {
                     var message = "Не удалось получить идентификаторы документов для выгрузки. Процесс прекращен.";
-                    AppLogging.Logger.Error(message);
+                    AppLogging.Logger.Debug(message);
                     upload.UploadStatus = UploadStatus.Canceled;
                     return;
                 }
@@ -130,11 +148,13 @@
                                 if (!result.Success)
                                 {
                                     uploadProgress.ProgressStatus = ProgressStatus.Error;
-                                    AddError(upload.UploadPath, result.ErrorMessage);
+                                    
+                                    AppLogging.Logger.Debug(string.Format("Не удалось получить инфу о путях по договору {0}", uploadProgress.ContractName));
                                 }
                                 else
                                 {
                                     // пути до файлов получены
+                                    AppLogging.Logger.Debug("Найдены пути по файлам для договора:" + uploadProgress.ContractName);
                                     uploadProgress.ScanPaths = result.ScanPaths;
                                     uploadProgress.ProgressStatus = ProgressStatus.PathFound;
                                 }
@@ -155,7 +175,7 @@
                 catch (Exception e)
                 {
                     // ошибка, вероятно проблемы с подключением
-                    AppLogging.Logger.Error(e, "Проблемы на этапе получения метаинформации о файлах");
+                    AppLogging.Logger.Debug("Проблемы на этапе получения метаинформации о файлах");
                     ChangeUploadStatus(upload, UploadStatus.Canceled);
                     context.Scheduler.UnscheduleJob(context.Trigger.Key);
                 }
@@ -167,6 +187,11 @@
                 #region Выгрузка
                 try
                 {
+                    if (!upload.UploadProgressRows.Any(c => c.ProgressStatus == ProgressStatus.PathFound))
+                    {
+                        AppLogging.Logger.Debug("На этапе выгрузки нет договоров для выгрузки");
+                    }
+
                     // ВЫГРУЗКА
                     // обработать только те договоры по которым узнали пути до файлов
                     foreach (var uploadUploadProgressRow in upload.UploadProgressRows.Where(c => c.ProgressStatus == ProgressStatus.PathFound))
@@ -210,7 +235,7 @@
                             }
                             catch (Exception e)
                             {
-                                AppLogging.Logger.Error("Не удалось скопировать файл скана:" + e.Message);
+                                AppLogging.Logger.Debug("Не удалось скопировать файл скана:" + e.Message);
                             }
                         }
 
@@ -240,7 +265,7 @@
                             }
                             catch (Exception e)
                             {
-                                AppLogging.Logger.Error("Не удалось скопировать файл скана:" + e.Message);
+                                AppLogging.Logger.Debug("Не удалось скопировать файл скана:" + e.Message);
                             }
                         }
 
@@ -264,6 +289,11 @@
 
             if (upload.UploadStatus == UploadStatus.Zipping)
             {
+                if (!upload.UploadProgressRows.Any(c => c.ProgressStatus == ProgressStatus.Uploaded))
+                {
+                    AppLogging.Logger.Debug("На этапе архивации нет договоров для архивации");
+                }
+
                 #region  Архивация
                 try
                 {
@@ -315,19 +345,22 @@
                                     {
                                         zipFile.AddFile(scanPath.ResultFileName);
                                         AppLogging.Logger.Debug("Добавили файл в архив");
-
-                                        zipFile.Save();
+                                        // убираем сохранение на каждый файл
+                                        // zipFile.Save();
                                         AppLogging.Logger.Debug("Сохранили файл в архиве. " + scanPath.FileName);
                                         scanPath.ScanStatus = ScanStatus.Zipped;
                                     }
                                     catch (Exception e)
                                     {
                                         var message = string.Format("Ошибка при добавлении файла документа в архив. Файл: {0}", scanPath.ResultFileName);
-                                        AppLogging.Logger.Error(e, message);
+                                        AppLogging.Logger.Debug(message);
                                         scanPath.ScanStatus = ScanStatus.Error;
                                         SaveScanPath(scanPath);
                                     }
                                 }
+
+
+                                zipFile.Save();
 
                                 uploadUploadProgressRow.ProgressStatus = ProgressStatus.Zipped;
                                 SaveProgress(uploadUploadProgressRow);
@@ -335,7 +368,7 @@
                             catch (Exception e)
                             {
                                 var message = string.Format("Ошибка при архивации файлов договора . Номер договора: {0}, Описание: {1}", uploadUploadProgressRow.ContractName, e.Message);
-                                AppLogging.Logger.Error(e, message);
+                                AppLogging.Logger.Debug(message);
                                 uploadUploadProgressRow.ProgressStatus = ProgressStatus.Error;
                                 SaveProgress(uploadUploadProgressRow);
                             }
@@ -346,7 +379,7 @@
                 }
                 catch (Exception e)
                 {
-                    AppLogging.Logger.Error(e, "Ошибка при создании или изменении архива.");
+                    AppLogging.Logger.Debug("Ошибка при создании или изменении архива.");
                     ChangeUploadStatus(upload, UploadStatus.Canceled);
                     context.Scheduler.UnscheduleJob(context.Trigger.Key);
                     return;
@@ -381,7 +414,23 @@
 
                 AppLogging.Logger.Info("Формируем протокол выполненной работы.");
 
-                using (var streamWriter = new StreamWriter(upload.UploadPath+"\\success.txt"))
+
+                if (upload.UploadProgressRows.Count(progress => progress.ProgressStatus != ProgressStatus.Zipped) > 0)
+                {
+                    using (var streamWriter = new StreamWriter(upload.UploadPath + "\\error.txt"))
+                    {
+
+                        foreach (var uploadUploadProgressRow in upload.UploadProgressRows.Where(p => p.ProgressStatus != ProgressStatus.Zipped))
+                        {
+                            streamWriter.WriteLine("Ошибки по договору:" + uploadUploadProgressRow.ContractName);
+                            streamWriter.WriteLine(string.Format("Количество файлов с ошибкой: {0}", uploadUploadProgressRow.ScanPaths.Count(path => path.ScanStatus == ScanStatus.Error)));
+                            streamWriter.WriteLine(string.Format("Количество не найденных файлов: {0}", uploadUploadProgressRow.ScanPaths.Count(path => path.ScanStatus == ScanStatus.FileNotExist)));
+                            streamWriter.WriteLine("---------------------------------------------------------------------------------------------------");
+                        }
+                    }
+                }
+                
+                using (var streamWriter = new StreamWriter(upload.UploadPath + "\\success.txt"))
                 {
                     streamWriter.WriteLine(string.Format("Общее количество договоров: {0}", upload.ContractCount));
                     streamWriter.WriteLine(string.Format("Количество заархивированных: {0}", upload.ZippedCount));
@@ -396,23 +445,46 @@
                     foreach (var uploadUploadProgressRow in upload.UploadProgressRows)
                     {
                         streamWriter.WriteLine(string.Format("Обработан договор: {0}", uploadUploadProgressRow.ContractName));
-                        streamWriter.WriteLine(string.Format("Общее количество файлов договора: {0}", uploadUploadProgressRow.ScanPaths.Count));
+
+
+                        if (uploadUploadProgressRow.ScanPaths.Any(s => s.NeedPathForDml))
+                        {
+                            streamWriter.WriteLine(string.Format("Общее количество файлов договора-транша: {0}", uploadUploadProgressRow.ScanPaths.Count(s => !s.NeedPathForDml)));
+                            streamWriter.WriteLine(string.Format("Общее количество файлов  договора-мз: {0}", uploadUploadProgressRow.ScanPaths.Count(s => s.NeedPathForDml)));
+                        }
+                        else
+                        {
+                            streamWriter.WriteLine(string.Format("Общее количество файлов договора: {0}", uploadUploadProgressRow.ScanPaths.Count));
+                        }
+
                         streamWriter.WriteLine(string.Format("Количество заархивированных файлов: {0}", uploadUploadProgressRow.ScanPaths.Count(path => path.ScanStatus == ScanStatus.Zipped)));
                         streamWriter.WriteLine(string.Format("Количество файлов с ошибкой: {0}", uploadUploadProgressRow.ScanPaths.Count(path => path.ScanStatus == ScanStatus.Error)));
                         streamWriter.WriteLine(string.Format("Количество не найденных файлов: {0}", uploadUploadProgressRow.ScanPaths.Count(path => path.ScanStatus == ScanStatus.FileNotExist)));
                     }
                 }
+                
+
+                
 
                 AppLogging.Logger.Info("Закончилась выгрузка. Файл архива: " + upload.UploadPath + "\\result.zip");
                 AppLogging.Logger.Debug("Попытка отправить письмо по указанным в конфиге параметрам");
 
                 try
                 {
-                    this.SendEmail(upload.Email, "Выгрузка документов", "Закончилась выгрузка, файлы размещены в папке: " + upload.UploadPath);
+                    if (upload.UploadProgressRows.Count(progress => progress.ProgressStatus == ProgressStatus.Zipped) == 0)
+                    {
+                        this.SendEmail(upload.Email, "Выгрузка документов", "Выгрузка завершилась неуспешно, обратитесь к системному администратору!");
+                    }
+                    else
+                    {
+                        this.SendEmail(upload.Email, "Выгрузка документов", "Закончилась выгрузка, файлы размещены в папке: " + upload.UploadPath);
+                    }
+
+                    
                 }
                 catch (Exception e)
                 {
-                    AppLogging.Logger.Error(e ,"Ошибка при попытке отправить письмо по указанным в конфиге параметрам. Описание: " + e.Message);
+                    AppLogging.Logger.Debug("Ошибка при попытке отправить письмо по указанным параметрам:" + upload.Email + ". Описание: " + e.Message);
                 }
                 
                 // убираем задачу из планировщика
@@ -430,7 +502,7 @@
         /// <returns></returns>
         private bool TimePartIsOver(DateTime fireTime)
         {
-            var timePart = fireTime.Add(new TimeSpan(0, 0, 10, 0));
+            var timePart = fireTime.Add(new TimeSpan(0, 0, 120, 0));
 
             bool result = (DateTime.Compare(timePart, DateTime.Now) < 0);
 
@@ -501,7 +573,7 @@
             }
             catch (Exception e)
             {
-                AppLogging.Logger.Error(e, "Ошибка при чтении файла идентификаторов.");
+                AppLogging.Logger.Debug("Ошибка при чтении файла идентификаторов.");
             }
             
             return result;
@@ -521,7 +593,7 @@
             }
             catch (Exception e)
             {
-                AppLogging.Logger.Error(e);
+                AppLogging.Logger.Debug(e);
                 return false;
             }
 

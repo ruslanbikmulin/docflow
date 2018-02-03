@@ -21,6 +21,7 @@ namespace Docflow.Controllers
         {
             {UploadStatus.Starting, "В процессе подготовки к выгрузке" },
             {UploadStatus.Uploading, "В процессе выгрузки сканов" },
+            {UploadStatus.FileInfoFilling, "В процессе сбора информации о путях до сканов" },
             {UploadStatus.Zipping, "В процессе архивирования договоров" },
             {UploadStatus.Paused, "В процессе ожидания разрешенного времени для работы" },
             {UploadStatus.Canceling, "В процессе прерывания" },
@@ -37,7 +38,7 @@ namespace Docflow.Controllers
             ViewData["uploadStart"] = upload == null ? " ".AddQuotes() : upload.UploadStartDate.ToString().AddQuotes();
             ViewData["userNameStart"] = upload == null ? " ".AddQuotes() : upload.UserNameStart.AddQuotes();
             ViewData["contractCount"] = upload == null ? 0 : upload.ContractCount;
-            ViewData["contractUploadedCount"] = upload == null ? 0 : upload.ContractCount;
+            ViewData["contractUploadedCount"] = upload == null ? 0 : upload.UploadProgressRows.Count(u => u.ProgressStatus == ProgressStatus.Uploaded);
             ViewData["contractZippedCount"] = upload == null ? 0 : upload.ZippedCount;
             ViewData["contractErrorCount"] = upload == null ? 0 : upload.ErrorCount;
 
