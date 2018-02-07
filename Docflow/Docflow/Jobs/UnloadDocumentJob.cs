@@ -43,7 +43,9 @@
             
 
             AppLogging.Logger.Debug("Начали задачу");
-            
+
+            //this.DbContext.Database.Log = this.WriteSqlLog; 
+
             var upload = DbContext.UploadEntityTable.FirstOrDefault(u => u.UploadStatus < UploadStatus.Completed);
 
             if (upload == null)
@@ -175,7 +177,16 @@
                 catch (Exception e)
                 {
                     // ошибка, вероятно проблемы с подключением
-                    AppLogging.Logger.Debug("Проблемы на этапе получения метаинформации о файлах");
+                    if (e.InnerException != null)
+                    {
+                        AppLogging.Logger.Debug("Проблемы на этапе получения метаинформации о файлах" + e.Message + e.StackTrace + e.InnerException.Message);
+                    }
+                    else
+                    {
+                        AppLogging.Logger.Debug("Проблемы на этапе получения метаинформации о файлах" + e.Message + e.StackTrace);
+                    }
+
+                    
                     ChangeUploadStatus(upload, UploadStatus.Canceled);
                     context.Scheduler.UnscheduleJob(context.Trigger.Key);
                 }
@@ -215,9 +226,23 @@
                                 context.Scheduler.UnscheduleJob(context.Trigger.Key);
                             }
 
+                            var spNotDmlIds = new List<long>();
+
                             // отбираем те файлы которые имеют установленный путь и не требуют создания внутренней директории ДМЛ
                             foreach (var scanPath in uploadUploadProgressRow.ScanPaths.Where(s => s.ScanStatus == ScanStatus.FilePathAssigned && !s.NeedPathForDml))
                             {
+
+                                spNotDmlIds.Add(scanPath.Id);
+                            }
+
+                            foreach (var scanPathId in spNotDmlIds)
+                            {
+                                var scanPath = this.DbContext.ScanPaths.FirstOrDefault(s => s.Id == scanPathId);
+                                if (scanPath == null)
+                                {
+                                    continue;
+                                }
+
                                 try
                                 {
                                     var fileBytes = File.ReadAllBytes(scanPath.FilePath);
@@ -237,17 +262,38 @@
                                     }
 
                                     scanPath.ScanStatus = ScanStatus.Downloaded;
-
-                                    this.SaveScanPath(scanPath);
+                                    
                                 }
                                 catch (Exception e)
                                 {
-                                    AppLogging.Logger.Debug("Не удалось скопировать файл скана:" + e.Message);
+                                    if (e.InnerException == null)
+                                    {
+                                        AppLogging.Logger.Debug("Не удалось скопировать файл скана:" + e.Message + e.StackTrace);
+                                    }
+                                    else
+                                    {
+                                        AppLogging.Logger.Debug("Не удалось скопировать файл скана:" + e.Message + e.StackTrace + e.InnerException.Message);
+                                    }
                                 }
                             }
 
+                            this.SaveProgress(uploadUploadProgressRow);
+
+                            var spDmlIds = new List<long>();
+
                             foreach (var scanPath in uploadUploadProgressRow.ScanPaths.Where(s => s.ScanStatus == ScanStatus.FilePathAssigned && s.NeedPathForDml))
                             {
+                                spDmlIds.Add(scanPath.Id);
+                            }
+
+                            foreach (var scanPathId in spDmlIds)
+                            {
+                                var scanPath = this.DbContext.ScanPaths.FirstOrDefault(s => s.Id == scanPathId);
+                                if (scanPath == null)
+                                {
+                                    continue;
+                                }
+
                                 try
                                 {
                                     var fileBytes = File.ReadAllBytes(scanPath.FilePath);
@@ -259,7 +305,6 @@
                                         Directory.CreateDirectory(Path.Combine(upload.UploadPath, numberContractForPathName, "dml"));
                                     }
 
-
                                     scanPath.ResultFileName = Path.Combine(upload.UploadPath, numberContractForPathName, "dml", scanPath.FileName);
                                     using (var fs = new FileStream(scanPath.ResultFileName, FileMode.Create))
                                     {
@@ -267,15 +312,20 @@
                                     }
 
                                     scanPath.ScanStatus = ScanStatus.Downloaded;
-
-                                    this.SaveScanPath(scanPath);
+                                    
                                 }
                                 catch (Exception e)
                                 {
-                                    AppLogging.Logger.Debug("Не удалось скопировать файл скана:" + e.Message);
+                                    if (e.InnerException == null)
+                                    {
+                                        AppLogging.Logger.Debug("Не удалось скопировать файл скана:" + e.Message + e.StackTrace);
+                                    }
+                                    else
+                                    {
+                                        AppLogging.Logger.Debug("Не удалось скопировать файл скана:" + e.Message + e.StackTrace + e.InnerException.Message);
+                                    }
                                 }
                             }
-
 
                             uploadUploadProgressRow.ProgressStatus = ProgressStatus.Uploaded;
                             this.SaveProgress(uploadUploadProgressRow);
@@ -283,14 +333,21 @@
                         }
                     }
 
-                    
-
                     AppLogging.Logger.Info("Смена статуса на Zipping");
                     this.ChangeUploadStatus(upload, UploadStatus.Zipping);
                 }
                 catch (Exception e)
                 {
-                    AppLogging.Logger.Fatal(e, "Не удалось активировать модуль получения файлов. Вероятные причины: нет удалось подключиться к базе данных.");
+                    AppLogging.Logger.Fatal(e, "Не удалось активировать модуль получения файлов. Вероятные причины: нет удалось подключиться к базе данных." + e.Message + e.StackTrace);
+                    try
+                    {
+                        this.ChangeUploadStatus(upload, UploadStatus.Canceled);
+                    }
+                    catch (Exception exception)
+                    {
+                        AppLogging.Logger.Fatal("Не удается  удалить регистрацию выгрузки:" + exception.Message + e.StackTrace);
+                    }
+
                     context.Scheduler.UnscheduleJob(context.Trigger.Key);
                     return;
                 }
@@ -370,7 +427,6 @@
                                             var message = string.Format("Ошибка при добавлении файла документа в архив. Файл: {0}", scanPath.ResultFileName);
                                             AppLogging.Logger.Debug(message);
                                             scanPath.ScanStatus = ScanStatus.Error;
-                                            SaveScanPath(scanPath);
                                         }
                                     }
 
@@ -586,14 +642,14 @@
                             var worksheet = workbook.Worksheets.First();
 
                             // до каких пор читаем строки в файле? пока ставим 10000
-                            for (var rowNum = 1; rowNum < 80000; rowNum++)
+                            for (var rowNum = 1; rowNum < 100000; rowNum++)
                             {
                                 var cell = worksheet.Cells[rowNum, 1];
 
                                 if (cell.Value != null
                                     && !string.IsNullOrEmpty(cell.Value.ToString()))
                                 {
-                                    result.Add(cell.Value.ToString());
+                                    result.Add(cell.Value.ToString().Trim());
                                 }
                             }
                         }
@@ -652,6 +708,11 @@
             {
                 streamWriter.WriteLine(message);
             }
+        }
+
+        public void WriteSqlLog(string query)
+        {
+            AppLogging.Logger.Info(query);
         }
     }
 }
